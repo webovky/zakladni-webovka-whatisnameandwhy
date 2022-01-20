@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <title>{%block title%}Titulek{%endblock%}</title>
+    
+    <link rel="stylesheet" 
+          href="{{ url_for('static', filename='styles.css')}}">
+
+</head>
+
+<body>
+
+<h1>Vítejte na této super epické stránce</h1>
+
+<p> Dnes si popovídáme o operačních systémech! </p>
+
+<ul>
+    <li><a href="{{ url_for('index') }}">Domů</a></li>
+    <li><a href="{{ url_for('windows') }}">Windows</a></li>
+    <li><a href="{{ url_for('linux') }}">Linux</a></li>
+    <li><a href="{{ url_for('macos') }}">Mac OS</a></li>
+    <li><a href="{{ url_for('login') }}">Loging</a></li>
+
+</ul>
+
+<p class="login">
+{% if 'user' in session %}
+Jsi přihlášen jako <strong>{{ session.get('user') }}</strong>. 
+<a href="{{ url_for('logout') }}">Odhlásit!</a>
+{% else %}
+Studie ukázala že 9 z 10 lidí co se přihlásí můžou očekávat vícero štěstí v životě! Tak se přihlaš 
+<a href="{{ url_for('login') }}">Přihlásit!</a>
+{% endif %}
+</p>
+
+
+{% for category, message in get_flashed_messages(with_categories=true) %}
+    <p class="message {{ category }}">{{ message }}</p>
+{% endfor %}
+
+
+{% block obsah %}
+
+<p>Operační systém je základní programové vybavení počítače, které umožňuje běh programů a ovlivňuje, jak bude počítačový systém komunikovat s uživatelem.
+
+Kromě počítačů používají operační systém i některá zařízení, která za počítač nepovažujeme, ale mají v sobě nějaký druh počítače zabudovaný, jako jsou mobilní telefony, herní konzole, televizory, set-top boxy, síťové prvky jako routery, apod. Použití operačního systému v určitém zařízení usnadňuje vývoj programového vybavení, a zpřístupňuje jeho vývoj i jiným subjektům než je výrobce zařízení, což obvykle přináší významné rozšíření možností uživatelského nastavení, přizpůsobení a použitelnosti daného zařízení.
+
+Mezi nejpoužívanější druhy operačních systémů osobních počítačů patří Microsoft Windows, macOS a Linux, u mobilních telefonů Android a iOS. 
+</p>
+
+<p>Nyní si jen tak něco vynásobíme {{ 2 ** 256}}</p>
+
+{% endblock obsah %} 
+
+</body>
+</html>
+
